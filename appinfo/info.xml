@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<info>
+	<id>oidc_events</id>
+	<name>Oidc events</name>
+	<summary>React to user_oidc token events</summary>
+	<description><![CDATA[Trigger actions when user_oidc obtains a login token or when it refreshes it.]]></description>
+	<version>1.0.0</version>
+	<licence>agpl</licence>
+	<author>Julien Veyssier</author>
+	<namespace>OidcEvents</namespace>
+	<documentation>
+		<developer>https://github.com/julien-nc/oidc_events</developer>
+	</documentation>
+	<category>integration</category>
+	<website>https://github.com/julien-nc/oidc_events</website>
+	<bugs>https://github.com/julien-nc/oidc_events/issues</bugs>
+	<screenshot>https://raw.githubusercontent.com/julien-nc/oidc_events/main/img/screenshots/screenshot1.jpg</screenshot>
+	<screenshot>https://raw.githubusercontent.com/julien-nc/oidc_events/main/img/screenshots/screenshot2.jpg</screenshot>
+	<screenshot>https://raw.githubusercontent.com/julien-nc/oidc_events/main/img/screenshots/screenshot3.jpg</screenshot>
+	<dependencies>
+		<nextcloud min-version="34" max-version="36"/>
+	</dependencies>
+</info>
