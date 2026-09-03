@@ -2,8 +2,7 @@
 
 namespace OCA\OidcEvents\AppInfo;
 
-use OCA\OidcEvents\Listener\TokenObtainedListener;
-use OCA\OidcEvents\Listener\TokenRefreshedListener;
+use OCA\OidcEvents\Listener\UserObtainedTokenListener;
 use OCP\AppFramework\App;
 use OCP\AppFramework\Bootstrap\IBootContext;
 use OCP\AppFramework\Bootstrap\IBootstrap;
@@ -20,11 +19,8 @@ class Application extends App implements IBootstrap {
 	}
 
 	public function register(IRegistrationContext $context): void {
-		if (class_exists('OCA\\UserOIDC\\Event\\TokenRefreshedEvent')) {
-			$context->registerEventListener(\OCA\UserOIDC\Event\TokenRefreshedEvent::class, TokenRefreshedListener::class);
-		}
-		if (class_exists('OCA\\UserOIDC\\Event\\TokenObtainedEvent')) {
-			$context->registerEventListener(\OCA\UserOIDC\Event\TokenObtainedEvent::class, TokenObtainedListener::class);
+		if (class_exists('OCA\\UserOIDC\\Event\\UserObtainedTokenEvent')) {
+			$context->registerEventListener(\OCA\UserOIDC\Event\UserObtainedTokenEvent::class, UserObtainedTokenListener::class);
 		}
 	}
 
