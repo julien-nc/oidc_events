@@ -30,9 +30,21 @@ class UserObtainedTokenListener implements IEventListener {
 		}
 
 		if ($event->getOldToken() !== null) {
-			$this->logger->info('[OidcEvents] Token refresh', ['user_id' => $event->getUserId(), 'event' => $event]);
+			$this->logger->info(
+				'[OidcEvents] Token refreshed', [
+					'user_id' => $event->getUserId(),
+					'expires_in' => $event->getNewToken()['expires_in'],
+					'refresh_expires_in' => $event->getNewToken()['refresh_expires_in'],
+				]
+			);
 		} else {
-			$this->logger->info('[OidcEvents] Token obtained', ['user_id' => $event->getUserId(), 'event' => $event]);
+			$this->logger->info(
+				'[OidcEvents] Token obtained on login', [
+					'user_id' => $event->getUserId(),
+					'expires_in' => $event->getNewToken()['expires_in'],
+					'refresh_expires_in' => $event->getNewToken()['refresh_expires_in'],
+				]
+			);
 		}
 	}
 }
