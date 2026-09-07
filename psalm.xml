@@ -52,5 +52,6 @@
 	</issueHandlers>
 	<stubs>
 		<file name="tests/stubs/oca_user_oidc.php" />
+		<file name="tests/stubs/oca_mail.php" />
 	</stubs>
 </psalm>
