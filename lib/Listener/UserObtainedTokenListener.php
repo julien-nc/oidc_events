@@ -12,6 +12,10 @@ namespace OCA\OidcEvents\Listener;
 use OCA\UserOIDC\Event\UserObtainedTokenEvent;
 use OCP\EventDispatcher\Event;
 use OCP\EventDispatcher\IEventListener;
+use OCP\Security\ICrypto;
+use OCP\Server;
+use Psr\Container\ContainerExceptionInterface;
+use Psr\Container\NotFoundExceptionInterface;
 use Psr\Log\LoggerInterface;
 
 /**
@@ -21,6 +25,7 @@ class UserObtainedTokenListener implements IEventListener {
 
 	public function __construct(
 		private LoggerInterface $logger,
+		private ICrypto $crypto,
 	) {
 	}
 
@@ -46,5 +51,33 @@ class UserObtainedTokenListener implements IEventListener {
 				]
 			);
 		}
+
+		$userId = $event->getUserId();
+		try {
+			$mailAccountMapper = Server::get(\OCA\Mail\Db\MailAccountMapper::class);
+		} catch (NotFoundExceptionInterface|ContainerExceptionInterface $e) {
+			$this->logger->info('[OidcEvents] MailAccountMapper not found', ['exception' => $e]);
+			return;
+		}
+		$accounts = $mailAccountMapper->findByUserId($userId);
+		if (count($accounts) === 0) {
+			$this->logger->info('[OidcEvents] Mail account not found');
+		}
+		$account = $accounts[0];
+		$this->logger->debug('[OidcEvents] Mail account was found', [
+			'user_id' => $userId,
+			'account_id' => $account->getId(),
+			'account_name' => $account->getName(),
+			'account_email' => $account->getEmail(),
+			'account_inbound_host' => $account->getInboundHost(),
+		]);
+
+		$password = $event->getNewToken()['access_token'];
+		$encryptedPassword = $this->crypto->encrypt($password);
+
+		$account->setInboundPassword($encryptedPassword);
+		$account->setOutboundPassword($encryptedPassword);
+		$mailAccountMapper->update($account);
+		$this->logger->info('[OidcEvents] PASSWORD was set', ['user_id' => $userId]);
 	}
 }
