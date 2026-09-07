@@ -44,10 +44,10 @@ jobs:
         id: build_release
         run: |
           echo "##[set-output name=app_id;]$APP_ID"
-          echo "###### copy certificate"
-          mkdir -p ~/.nextcloud/certificates
-          wget --quiet "https://github.com/nextcloud/app-certificate-requests/raw/master/${APP_ID}/${APP_ID}.crt" -O ~/.nextcloud/certificates/${APP_ID}.crt
-          echo "$APP_PRIVATE_KEY" > ~/.nextcloud/certificates/${APP_ID}.key
+          #echo "###### copy certificate"
+          #mkdir -p ~/.nextcloud/certificates
+          #wget --quiet "https://github.com/nextcloud/app-certificate-requests/raw/master/${APP_ID}/${APP_ID}.crt" -O ~/.nextcloud/certificates/${APP_ID}.crt
+          #echo "$APP_PRIVATE_KEY" > ~/.nextcloud/certificates/${APP_ID}.key
           echo "###### install dependencies"
           export DEBIAN_FRONTEND=noninteractive
           sudo apt update -y
@@ -68,8 +68,8 @@ jobs:
           version=${tag/v/}
           webserveruser=runner occ_dir=~/html/nextcloud version=$version make appstore
           echo "##[set-output name=version;]$version"
-        env:
-          APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
+        #env:
+        #  APP_PRIVATE_KEY: ${{ secrets.APP_PRIVATE_KEY }}
 
       - name: Attach tarball to github release
         uses: svenstaro/upload-release-action@2b9d2847a97b04d02ad5c3df2d3a27baa97ce689 # v2
