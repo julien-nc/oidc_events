@@ -4,7 +4,7 @@
 	<name>Oidc events</name>
 	<summary>React to user_oidc token events</summary>
 	<description><![CDATA[Trigger actions when user_oidc obtains a login token or when it refreshes it.]]></description>
-	<version>1.0.0</version>
+	<version>1.0.1</version>
 	<licence>agpl</licence>
 	<author>Julien Veyssier</author>
 	<namespace>OidcEvents</namespace>
