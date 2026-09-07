@@ -106,6 +106,7 @@ appstore: clean
 	--exclude=/krankerl.toml \
 	--exclude=/psalm.xml \
 	--exclude=/vendor \
+	--exclude=/vendor-bin \
 	$(project_dir) $(sign_dir)/$(app_name)
 	@if [ -f $(cert_dir)/$(app_name).key ]; then \
 		sudo chown $(webserveruser) $(sign_dir)/$(app_name)/appinfo ;\
