@@ -15,8 +15,6 @@
 	<website>https://github.com/julien-nc/oidc_events</website>
 	<bugs>https://github.com/julien-nc/oidc_events/issues</bugs>
 	<screenshot>https://raw.githubusercontent.com/julien-nc/oidc_events/main/img/screenshots/screenshot1.jpg</screenshot>
-	<screenshot>https://raw.githubusercontent.com/julien-nc/oidc_events/main/img/screenshots/screenshot2.jpg</screenshot>
-	<screenshot>https://raw.githubusercontent.com/julien-nc/oidc_events/main/img/screenshots/screenshot3.jpg</screenshot>
 	<dependencies>
 		<nextcloud min-version="34" max-version="36"/>
 	</dependencies>
